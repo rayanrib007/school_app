@@ -4,15 +4,16 @@ import PropTypes from 'prop-types';
 import { get } from 'lodash';
 
 import { Container } from '../../styles/GlobalStyles';
-import { Form, ProfilePicture } from './styled';
+import { Form, ProfilePicture, Title } from './styled';
 
 import axios from '../../services/axios';
 import { toast } from 'react-toastify';
 import { isEmail, isFloat, isInt } from 'validator';
 import Loading from '../../components/Loading/Index';
-import { FaUserCircle } from 'react-icons/fa';
+import { FaEdit, FaUserCircle } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import * as actions from '../../store/modules/auth/actions';
+import { Link } from 'react-router-dom';
 
 export default function FormAluno() {
   const params = useParams();
@@ -114,15 +115,21 @@ export default function FormAluno() {
   return (
     <Container>
       <Loading isLoading={isLoading} />
-      <h1>{id ? 'Editar Aluno' : 'Novo Aluno'}</h1>
+      <Title>{id ? 'Editar Aluno' : 'Novo Aluno'}</Title>
       <Form>
-        <ProfilePicture>
-          {id && foto ? (
-            <img crossOrigin="anonymous" src={foto} alt={aluno.nome} />
-          ) : (
-            <FaUserCircle size={70} />
-          )}
-        </ProfilePicture>
+        {id && (
+          <ProfilePicture>
+            {foto ? (
+              <img crossOrigin="anonymous" src={foto} alt={aluno.nome} />
+            ) : (
+              <FaUserCircle size={180} />
+            )}
+            <Link to={`/fotos/${id}`}>
+              <FaEdit size={24} />
+            </Link>
+          </ProfilePicture>
+        )}
+
         <label htmlFor="nome">
           <input
             value={nome}
