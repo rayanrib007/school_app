@@ -9,7 +9,7 @@ import { Title, Form } from './styled';
 import axios from '../../services/axios';
 import { get } from 'lodash';
 import { toast } from 'react-toastify';
-import * as actions from '../../store/modules/auth/actions';
+import * as actionsq from '../../store/modules/auth/actions';
 
 export default function Fotos() {
   const params = useParams();
